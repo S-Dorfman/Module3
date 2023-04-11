@@ -4,21 +4,21 @@ const app = express();
 const PORT = 3000; 
 
 
-//todo ========= configuration
+// ========= configuration
 
-// //telling app to use jsx for view engine
-// app.set('view engine', 'jsx');
-// // turn on the engine, require jsx-view-engine and call method
-// app.engine('jsx', require('jsx-view-engine').createEngine());
+//telling app to use jsx for view engine
+app.set('view engine', 'jsx');
+// turn on the engine, require jsx-view-engine and call method
+app.engine('jsx', require('jsx-view-engine').createEngine());
 
-// //middleware take in req res and next property 
-// //setting a middleware to run in app
-// app.use((req, res, next) => {
-//     console.log(req.url)
-//     next()
-// })
-// //parses the data from the request 
-// app.use(express.urlencoded({extended: false}))
+//middleware take in req res and next property 
+//setting a middleware to run in app
+app.use((req, res, next) => {
+    console.log(req.url)
+    next()
+})
+//parses the data from the request 
+app.use(express.urlencoded({extended: false}))
 
 //Data
 const cats = require('./models/catbreeds')
@@ -31,8 +31,15 @@ app.get('/', (req, res) => {
 
 //index route
 app.get('/cats', (req, res) => {
-    res.send(cats)
-    // res.render('Index', {cats: cats})
+    // res.send(cats)
+    res.render('Index', {cats: cats})
+})
+
+//show route
+app.get('/cats/:indexOfCatsArray', (req, res) => {
+    console.log(req.params);
+    // res.send(cats);
+    res.render('Show', {cat: cats[req.params.indexOfCatsArray]});
 })
 
 

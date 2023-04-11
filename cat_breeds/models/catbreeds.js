@@ -3,19 +3,19 @@ const cats = [
     {
         breed:'Tabby',
         origin: 'Ancient Egypt',
-        personality: 'friendly independent',
+        personality: 'friendly and independent',
         hypoallergenic: false
     },
     {
         breed:'Calico',
         origin: 'Egypt and the Mediterranean Coast',
-        personality: 'sassy spunky',
+        personality: 'sassy and spunky',
         hypoallergenic: false
     },
     {
         breed:'Norwegian Forest',
         origin: 'Norway',
-        personality: 'friendly interactive',
+        personality: 'friendly and interactive',
         hypoallergenic: false
     }
 ];

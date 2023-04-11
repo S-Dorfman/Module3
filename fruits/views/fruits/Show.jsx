@@ -19,11 +19,4 @@ function Show(props) {
     )
 }
 
-// class Show extends React.Component {
-//    render () {
-//     return (
-//       <h1> Show Route </h1>
-//      );
-//     }
-//  }
  module.exports = Show;
