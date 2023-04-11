@@ -16,13 +16,14 @@ app.set('view engine', 'jsx');
 // turn on the engine, require jsx-view-engine and call method
 app.engine('jsx', require('jsx-view-engine').createEngine());
 
-//?middleware take in req res and next property 
-//setting a middleware to run in app
+
+//*middleware take in req res and next property 
+//setting a middleware to run in app - creating our own 
 app.use((req, res, next) => {
     console.log(req.url)
     next()
 })
-//parses the data from the request 
+//parses the data from the request (available in req.body in POST method (accepting data from the form))
 app.use(express.urlencoded({extended: false}))
 
 
@@ -79,7 +80,7 @@ app.get('/fruits/new', (req, res) => {
 
 /**
  * Show Route: (returns a single fruit)
- ** colon : less specific, goes after specific routes
+ *? colon : less specific, goes after specific routes
  */
 app.get('/fruits/:id', (req, res) => {
     console.log(req.params);
