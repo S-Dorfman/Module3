@@ -21,6 +21,7 @@ console.log(fruits);
                     )
                 })}
             </ul>
+            <a href="/fruits/new">Add another Fruit</a>
         </div>
     )
 }

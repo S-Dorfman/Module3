@@ -14,6 +14,7 @@ function Show(props) {
             `It is ready to eat! Bon Apetit!`: 
             `It is not ready to eat..have patience!`}
             </p>
+            <a href="/fruits">Back to Home Page</a>
         </div>
     )
 }
