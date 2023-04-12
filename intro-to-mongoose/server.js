@@ -2,17 +2,16 @@ require('dotenv').config();
 const express = require('express');
 // const mongoose = require('mongoose');
 
-//connect to seperate file for configuration to DB
+//connect to separate file for configuration to DB
 const connectToDB = require('./config/db')
 const Tweet = require('./models/Tweet')
 
-const app = express()
+const app = express();
 
 app.get('/', (req, res) => {
     res.send('Mongoose server is up')
 })
 
-//*create single tweet 
 //data comes from client or react app
 // const myFirstTweet = {
 //     title: "Deep Thoughts",
@@ -22,7 +21,7 @@ app.get('/', (req, res) => {
 
 
 
-//* create many tweets
+
 const manyTweets = [
     {
       title: "Deep Thoughts",
@@ -73,23 +72,83 @@ const manyTweets = [
   ];
 
 
-  // first step create tweet
-  Tweet.create(manyTweets)
-  // if database transaction succeeds - then
-  .then(tweet => {
-    // res.send('Tweet created')
+  Tweet.findOneAndRemove({ title: "Deep Thoughts" })
+  // if database transaction succeeds
+  .then((tweet) => {
     console.log(tweet)
   })
-  // if database transaction fails - catch
-    .catch((error) => {
+  // if database transaction fails
+  .catch((error) => {
     console.log(error)
-  })   
-  // close db connection either way
-.finally(() => {
-   console.log('This runs if promise is completed or rejected');
-   }) 
+  })
+  
+  //* Using operator to filter queries
+  // Tweet.find({ likes: { $gte: 20 } })
+  // // if database transaction succeeds
+  // .then((tweets) => {
+  //   console.log(tweets)
+  // })
+  // // if database transaction fails
+  // .catch((error) => {
+  //   console.log(error)
+  // })
+  
+  //* search or filter by the title
+  // Tweet.find({ title: "Sage Advice" })
+  // // if database transaction succeeds
+  // .then((tweet) => {
+  //   console.log(tweet)
+  // })
+  // // if database transaction fails
+  // .catch((error) => {
+  //   console.log(error)
+  // })
+  
+  //* query all documents and return the selected fields\
+  // Tweet.find({}, "title body")
+  //   // if database transaction succeeds
+  //   .then((tweets) => {
+  //     console.log(tweets);
+  //   })
+  //   // if database transaction fails
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  
+  //* find all Tweets in db
+  // Tweet.find({})
+  //   // if database transaction succeeds
+  //   .then((tweets) => {
+  //     console.log(tweets);
+  //   })
+  //   // if database transaction fails
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });  
 
+  // * Create many tweets 
+//   Tweet.insertMany(manyTweets)
+// // if database transaction succeeds
+// .then((tweets) => {
+//   console.log(tweets)
+// })
+// // if database transaction fails
+// .catch((error) => {
+//   console.log(error)
+// })
 
+//* Create a single tweet
+// Tweet.create(myFirstTweet)
+// .then(tweet => {
+//     // res.send('Tweet Created')
+//     console.log(tweet);
+// })
+// .catch((error) => {
+//     console.error(error)
+// })
+// .finally(() => {
+//     console.log('This runs if the promise is completed or rejected');
+// })
 
 
 app.listen(3000, () => {
