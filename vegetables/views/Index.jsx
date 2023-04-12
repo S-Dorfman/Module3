@@ -8,22 +8,22 @@ console.log(veggies);
 
         <div>
             <h1>Index Page</h1>
-            <nav>
-            <a href="/veggies/new">Add another Fruit</a>
-            </nav>
-            <ul>
-                {veggies.map((fruit, i) => {
+            {/* <nav>
+            <a href="/veggies/new">Add another Veggie</a>
+            </nav> */}
+            {/* <ul>
+                {veggies.map((veggie, i) => {
                     return (
-                        <li key={fruit._id}>
-                            The <a href={`/veggies/${fruit._id}`}>{fruit.name}</a>
-                            {' '}is {fruit.color}{'. '}
-                            {fruit.readyToEat
+                        <li key={veggie._id}>
+                            The <a href={`/veggies/${veggie._id}`}>{veggie.name}</a>
+                            {' '}is {veggie.color}{'. '}
+                            {veggie.readyToEat
                             ? `It is ready to eat`
                             : `It is not ready to eat`}{'.'}
                         </li>
                     )
                 })}
-            </ul>
+            </ul> */}
             
         </div>
     )
