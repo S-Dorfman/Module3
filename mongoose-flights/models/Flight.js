@@ -11,16 +11,18 @@ const flightSchema = new mongoose.Schema({
         type: Number, 
         //limit # 
        min: 1,
-       max: 99 
+       max: 9999 
     },
     departs: {
         type: Date,
-        default: function() {
-            const nextYear = new Date();
+        required: true
+        
+            // function() {
+            // const nextYear = new Date();
 
-            nextYear.setFullYear(nextYear.getFullYear() + 1);
-            return nextYear;
-        }
+            // nextYear.setFullYear(nextYear.getFullYear() + 1);
+            // return nextYear;
+        // }
     }
 });
 
