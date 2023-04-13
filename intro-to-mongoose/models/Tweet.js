@@ -27,6 +27,7 @@ const tweetSchema = new mongoose.Schema({
 )
 
 // Create the model 
-
 const Tweet = mongoose.model('Tweet', tweetSchema)
+
+//export
 module.exports = Tweet; 

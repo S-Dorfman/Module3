@@ -1,4 +1,4 @@
-// seperate file for configuration to DB
+// separate file for configuration to DB
 
 const mongoose = require('mongoose');
 
