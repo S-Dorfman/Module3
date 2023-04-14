@@ -8,11 +8,14 @@ function New() {
                 Title:
                 <input type="text" name="title" />
                 <br />
-
-                <input type="textarea" name="" />
-                shipIsBroken:
-                <input type="checkbox" name="title" />
-                <input type="submit"/>
+                Entry:
+                <textarea name="entry" cols="10" rows="4"></textarea>
+                <br />
+                Ship Is Broken:
+                <br />
+                <input type="checkbox" name="shipIsBroken" />
+                <br />
+                <input type="submit" value="Create Entry"/>
 
             </form>
         </div>

@@ -1,8 +1,14 @@
+require('dotenv').config();
 const express = require('express');
-
 
 const app = express();
 const PORT = 3000;
+
+//connect to separate file for configuration to DB
+const connectToDB = require('./config/db')
+//connect model 
+// const .... = require('./models/....')
+
 
 //Configuration
 //telling app to use jsx for view engine
@@ -29,6 +35,17 @@ app.get('/new', (req, res) => {
 })
 
 //create route
+app.post('/logs', (req, res) => {
+    
+    // console.log(req.body);
+    if (req.body.shipIsBroken === 'on') {
+        req.body.shipIsBroken = true;
+    } else {
+        req.body.shipIsBroken = false;
+    }
+    res.send(req.body)
+})
+
 
 //index route
 
@@ -46,4 +63,5 @@ app.get('/new', (req, res) => {
 //Running app
 app.listen(3000, () => {
     console.log(`App is running on PORT: ${PORT}`);
+    connectToDB()
 })
