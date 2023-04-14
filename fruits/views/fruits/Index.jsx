@@ -1,4 +1,5 @@
 const React = require('react')
+const DefaultLayout = require('../layout/Default')
 
 function Index(props) {
 const {fruits} = props;
@@ -6,8 +7,8 @@ console.log(fruits);
 
     return(
 
-        <div>
-            <h1>Index Page</h1>
+        <DefaultLayout title="Fruits Index Page">
+            {/* <h1>Index Page</h1> */}
             <nav>
             <a href="/fruits/new">Add another Fruit</a>
             </nav>
@@ -20,12 +21,19 @@ console.log(fruits);
                             {fruit.readyToEat
                             ? `It is ready to eat`
                             : `It is not ready to eat`}{'.'}
+                        <a href={`/fruits/${fruit._id}/edit`}>Edit this fruit</a>
+
+                            <form method="POST" action={`/fruits/${fruit._id}?_method=DELETE`}>
+                                <input type="submit" value="DELETE"></input>
+                            </form>
                         </li>
                     )
                 })}
             </ul>
+
+
             
-        </div>
+        </DefaultLayout>
     )
 }
 

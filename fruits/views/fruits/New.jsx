@@ -1,20 +1,27 @@
 const React = require('react');
+const DefaultLayout = require('../layout/Default');
 
 function New() {
     return(
-        <div>
-            <h1>New Fruit Page</h1>
+        <DefaultLayout title="Add New Fruit">
+            {/* <h1>New Fruit Page</h1> */}
 
             <form action="/fruits" method="POST"> 
-                Name: <input type="text" name="name" />
+                Name: <br />
+                <input type="text" name="name" />
                 <br />
-                Color: <input type="text" name="color"/>
                 <br />
-                Is Ready to Eat: <input type="checkbox"  name="readyToEat" />
+                Color: <br />
+                <input type="text" name="color"/>
+                <br />
+                <br />
+                Is Ready to Eat:
+                <input type="checkbox"  name="readyToEat" />
+                <br />
                 <br />
                 <input type="submit" value="Create Fruit" />
             </form>
-        </div>
+        </DefaultLayout>
     )
 }
 

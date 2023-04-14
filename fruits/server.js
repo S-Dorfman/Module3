@@ -2,6 +2,8 @@ require('dotenv').config();  //call and configure dotenv package
 const express = require('express');
 //require mongoose to connect to database
 const mongoose = require('mongoose');
+// require method override
+const methodOverride = require('method-override')
 
 //Data
 const fruits = require('./models/fruits'); 
@@ -25,7 +27,8 @@ app.use((req, res, next) => {
 })
 //parses the data from the request (available in req.body in POST method (accepting data from the form))
 app.use(express.urlencoded({extended: false}))
-
+//use methodOverride.  override with POST using _method to DELETE
+app.use(methodOverride('_method'))
 
 
 //* ======= Routes
@@ -78,6 +81,56 @@ app.get('/fruits/new', (req, res) => {
     
 })
 
+
+//*Return the edit form
+app.get('/fruits/:id/edit', (req, res) => {
+    Fruit.findById(req.params.id, (error, foundFruit) => {
+       if(!error) {
+        res.render('fruits/Edit', {fruit: foundFruit})
+       } else {
+        res.send({msg: error.message})
+       }
+    })
+})
+
+//* Handle the edit form data
+app.put('/fruits/:id', (req, res) => {
+    if(req.body.readyToEat === 'on') {
+        req.body.readyToEat = true; 
+    } else {
+        req.body.readyToEat = false;
+    }
+    Fruit.findByIdAndUpdate(req.params.id, req.body, (error, updatedFruit) => {
+        // res.send(updatedFruit)
+        res.redirect(`/fruits/${req.params.id}`)
+    })
+})
+
+
+//*Seed Route - add fruit data to index 
+app.get('/fruits/seed', (req, res)=>{
+    Fruit.create([
+        {
+            name:'grapefruit',
+            color:'pink',
+            readyToEat:true
+        },
+        {
+            name:'grape',
+            color:'purple',
+            readyToEat:false
+        },
+        {
+            name:'avocado',
+            color:'green',
+            readyToEat:true
+        }
+    ], (err, data)=>{
+        res.redirect('/fruits');
+    })
+});
+
+
 /**
  * Show Route: (returns a single fruit)
  *? colon : less specific, goes after specific routes
@@ -90,6 +143,17 @@ app.get('/fruits/:id', (req, res) => {
         res.render('fruits/Show', {fruit: foundFruits})
     })
 });
+
+//! DELETE FRUIT
+app.delete('/fruits/:id', (req, res) => {
+    Fruit.findByIdAndRemove(req.params.id, (error, deletedFruit) => {
+        //? can add method to save deleted data in a different database
+        // res.send(deletedFruit)
+        res.redirect('/fruits')
+    })
+})
+
+
 
 /**
  * Route for typos - redirect to '/fruits' page if user enters wrong route - res.redirect('/fruits')

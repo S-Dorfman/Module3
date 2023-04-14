@@ -1,5 +1,6 @@
 
-const React = require('react')
+const React = require('react');
+const DefaultLayout = require('../layout/Default');
 
 
 function Show(props) {
@@ -7,15 +8,15 @@ function Show(props) {
     console.log(fruit);
 
     return (
-        <div>
-            <h1>Show Page</h1>
+        <DefaultLayout title="Fruit Show Page" style={{}}>
+            {/* <h1>Show Page</h1> */}
             <p>The {fruit.name} is {fruit.color} {" "} 
             {fruit.readyToEat ? 
             `It is ready to eat! Bon Apetit!`: 
             `It is not ready to eat..have patience!`}
             </p>
             <a href="/fruits">Back to Home Page</a>
-        </div>
+        </DefaultLayout>
     )
 }
 
