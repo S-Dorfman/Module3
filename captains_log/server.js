@@ -5,9 +5,9 @@ const app = express();
 const PORT = 3000;
 
 //connect to separate file for configuration to DB
-const connectToDB = require('./config/db')
+const connectToDB = require('./config/db');
 //connect model 
-// const .... = require('./models/....')
+const Logs = require('./models/Logs')
 
 
 //Configuration
