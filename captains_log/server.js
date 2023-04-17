@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 })
 
 //new route
-app.get('/new', (req, res) => {
+app.get('/logs/new', (req, res) => {
     // res.send('NEW')
     res.render('New')
 })
@@ -43,11 +43,24 @@ app.post('/logs', (req, res) => {
     } else {
         req.body.shipIsBroken = false;
     }
-    res.send(req.body)
+    // res.send(req.body)
+
+    //add new mongoDB Log Object
+    Logs.create(req.body, (error, createdLog) => {
+        // res.send(createdLog);
+        res.redirect('/logs')
+    })
+
+    // res.redirect()
 })
 
 
 //index route
+app.get('/logs', (req,res) => {
+    Logs.find({},(error, allLogs) => {
+        res.render('Index', {logs: allLogs})
+    })
+})
 
 //show route
 
