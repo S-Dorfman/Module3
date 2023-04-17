@@ -62,7 +62,13 @@ app.get('/logs', (req,res) => {
     })
 })
 
-//show route
+//show route - return a single lod
+app.get('/logs/:id', (req, res) => {
+    // console.log(req.params)
+    Logs.findById(req.params.id, (error, foundLogs) => {
+        res.render('Show', {log: foundLogs})
+    })
+})
 
 //delete route
 

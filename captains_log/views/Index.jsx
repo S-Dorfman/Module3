@@ -15,7 +15,7 @@ function Index(props) {
                 {logs.map((log, i) => {
                     return(
                         <li key={log._id}>
-                           Log: <a href={`/`}>{' '}{log.title}</a> 
+                           Log: <a href={`/logs/${log._id}`}>{' '}{log.title}</a> 
                            {log.entry}{' '}{log.shipIsBroken
                            ? `Ship is broken`
                            : `Ship is working. Journey on schedule`
