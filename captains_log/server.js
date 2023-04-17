@@ -23,18 +23,19 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({extended: false}))
 
 
-// Routes
+// * ============== Routes
 app.get('/', (req, res) => {
     res.send('<h1>Home Page</h1>')
 })
 
-//new route
-app.get('/logs/new', (req, res) => {
-    // res.send('NEW')
-    res.render('New')
+//*index route
+app.get('/logs', (req,res) => {
+    Logs.find({},(error, allLogs) => {
+        res.render('Index', {logs: allLogs})
+    })
 })
 
-//create route
+//*POST method
 app.post('/logs', (req, res) => {
     
     // console.log(req.body);
@@ -55,14 +56,22 @@ app.post('/logs', (req, res) => {
 })
 
 
-//index route
-app.get('/logs', (req,res) => {
-    Logs.find({},(error, allLogs) => {
-        res.render('Index', {logs: allLogs})
-    })
+//*new route
+app.get('/logs/new', (req, res) => {
+    // res.send('NEW')
+    res.render('New')
 })
 
-//show route - return a single lod
+//todo edit route
+
+//todo update route
+
+
+
+
+
+
+//*show route - return a single lod
 app.get('/logs/:id', (req, res) => {
     // console.log(req.params)
     Logs.findById(req.params.id, (error, foundLogs) => {
@@ -70,11 +79,14 @@ app.get('/logs/:id', (req, res) => {
     })
 })
 
-//delete route
+//!delete route
 
-//edit route
-
-//update route
+app.delete('logs/:id', (req, res) => {
+    Logs.findByIdAndRemove(req.params.id, (error, deletedLog) => {
+        // res.send(deletedLog)
+        res.redirect('/logs')
+    })
+})
 
 
 

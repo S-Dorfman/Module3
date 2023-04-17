@@ -2,7 +2,7 @@ const React = require('react')
 
 function Index(props) {
     const {logs} = props;
-    console.log(logs);
+    // console.log(logs);
 
     return(
 
@@ -20,6 +20,10 @@ function Index(props) {
                            ? `Ship is broken`
                            : `Ship is working. Journey on schedule`
                            }{'.'}
+
+                    <form method="POST" action={`/logs/${log._id}?_method=DELETE`}>
+                                <input type="submit" value="DELETE"></input>
+                            </form>
                         </li>
                     )
                 })}
