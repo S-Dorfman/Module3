@@ -1,6 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 
+//? require method override
+const methodOverride = require('method-override')
+
 const app = express();
 const PORT = 3000;
 
@@ -21,6 +24,8 @@ app.use((req, res, next) => {
     next()
 })
 app.use(express.urlencoded({extended: false}))
+//? use methodOverride.  override with POST using _method to DELETE
+app.use(methodOverride('_method'))
 
 
 // * ============== Routes
@@ -62,13 +67,32 @@ app.get('/logs/new', (req, res) => {
     res.render('New')
 })
 
-//todo edit route
+//* edit form
+app.get('/logs/:id/edit', (req, res) => {
+    Logs.findById(req.params.id, (error, foundLog) => {
+        if(!error) {
+            res.render('Edit', {log: foundLog})
+        } else {
+            res.send({msg: error.message})
+        }
+    })
+})
 
-//todo update route
 
 
+//* handle the edit form data
 
-
+app.put('/logs/:id', (req, res) => {
+    if(req.body.shipIsBroken === 'on') {
+        req.body.shipIsBroken = true; 
+    } else {
+        req.body.shipIsBroken = false;
+    }
+    Logs.findByIdAndUpdate(req.params.id, req.body, (error, updatedLog) => {
+        // res.send(updatedLog)
+        res.redirect(`/logs/${req.params.id}`)
+    })
+})
 
 
 //*show route - return a single lod
@@ -81,7 +105,7 @@ app.get('/logs/:id', (req, res) => {
 
 //!delete route
 
-app.delete('logs/:id', (req, res) => {
+app.delete('/logs/:id', (req, res) => {
     Logs.findByIdAndRemove(req.params.id, (error, deletedLog) => {
         // res.send(deletedLog)
         res.redirect('/logs')

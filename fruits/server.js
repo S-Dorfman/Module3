@@ -29,6 +29,8 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({extended: false}))
 //use methodOverride.  override with POST using _method to DELETE
 app.use(methodOverride('_method'))
+//* tell exppress app to use css styles from static public folder
+app.use(express.static('public'))
 
 
 //* ======= Routes

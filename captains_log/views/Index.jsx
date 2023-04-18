@@ -21,6 +21,8 @@ function Index(props) {
                            : `Ship is working. Journey on schedule`
                            }{'.'}
 
+                           <a href={`/logs/${log._id}/edit`}>Edit this log</a>
+
                     <form method="POST" action={`/logs/${log._id}?_method=DELETE`}>
                                 <input type="submit" value="DELETE"></input>
                             </form>

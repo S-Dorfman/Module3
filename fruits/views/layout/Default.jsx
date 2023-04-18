@@ -5,6 +5,8 @@ function DefaultLayout(props) {
     return (
         <html>
             <head>
+            <link rel="stylesheet" href="/css/app.css" /> 
+            <link rel="icon" href="favicon.ico" />   
                 <title>{title}</title>
             </head>
 
