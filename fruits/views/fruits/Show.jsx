@@ -5,7 +5,7 @@ const DefaultLayout = require('../layout/Default');
 
 function Show(props) {
     const {fruit} = props;
-    console.log(fruit);
+    // console.log(fruit);
 
     return (
         <DefaultLayout title="Fruit Show Page" style={{}}>

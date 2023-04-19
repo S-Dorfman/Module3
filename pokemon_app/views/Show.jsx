@@ -2,14 +2,14 @@
 
 const React = require('react')
 
-function Index(props) {
+function Show(props) {
     const {pokemon} = props;
-    // console.log(pokemon);
+    console.log(pokemon);
   return (
     <div>
         <h1>Gotta catch 'em all</h1>
         <h2>{pokemon.name}</h2>
-        <div>
+        <div>  
         <img src={pokemon.img + '.jpg'}></img> 
         </div>
         <nav>
@@ -19,4 +19,4 @@ function Index(props) {
   )
 }
 
-module.exports = Index;
+module.exports = Show;

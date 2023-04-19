@@ -1,4 +1,12 @@
+require('dotenv').config();
 const express = require('express');
+
+//connect to separate file for configuration to DB
+const connectToDB = require('./config/db')
+
+//Data 
+const Pokemon = require('./models/Pokemon1')
+const pokemon = require('./models/pokemon')
 
 const app = express(); 
 const PORT = 3000; 
@@ -19,10 +27,8 @@ app.use((req, res, next) => {
 //parses the data from the request 
 app.use(express.urlencoded({extended: false}))
 
-//Data 
-const pokemon = require('./models/pokemon')
 
-//routes
+//*routes
 //home
 app.get('/', (req, res)=> {
     res.send('Welcome to the Pokemon App!')
@@ -31,16 +37,40 @@ app.get('/', (req, res)=> {
 //index route
 app.get('/pokemon', (req,res) => {
     // res.send(pokemon)
-    res.render('Index', {pokemon: pokemon})
+    // res.render('Index', {pokemon: pokemon})
+    //? return mongoDB collection
+    Pokemon.find({}, (error, allPokemon) => {
+        res.render('Index', {pokemon: allPokemon})
+    })
+})
+
+//POST Method
+app.post('/pokemon', (req, res) => {
+    // console.log(req.body);
+
+    //* add new mongoDB object
+    Pokemon.create(req.body, (error, createdPokemon) => {
+        // res.send(createdPokemon)
+        res.redirect('/pokemon')
+    })
+})
+
+//new Route
+app.get('/pokemon/new', (req,res) => {
+    res.render('New')
 })
 
 //:show route 
 app.get('/pokemon/:indexOfPokemonArray', (req,res) => {
     // res.send(req.params.id)
-    res.render('Show', {pokemon: pokemon[req.params.indexOfPokemonArray]})
+    // res.render('Show', {pokemon: pokemon[req.params.indexOfPokemonArray]})
+    Pokemon.findById(req.params.id, (error, foundPokemon) => {
+        res.render('Show', {pokemon: foundPokemon})
+    })
 })
 
 //running app
 app.listen(3000, () => {
     console.log(`Server is running on Port: ${PORT}`);
+    connectToDB()
 })
