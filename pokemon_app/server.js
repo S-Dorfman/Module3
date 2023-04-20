@@ -61,7 +61,7 @@ app.get('/pokemon/new', (req,res) => {
 })
 
 //:show route 
-app.get('/pokemon/:indexOfPokemonArray', (req,res) => {
+app.get('/pokemon/:id', (req,res) => {
     // res.send(req.params.id)
     // res.render('Show', {pokemon: pokemon[req.params.indexOfPokemonArray]})
     Pokemon.findById(req.params.id, (error, foundPokemon) => {

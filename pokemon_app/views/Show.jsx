@@ -8,10 +8,8 @@ function Show(props) {
   return (
     <div>
         <h1>Gotta catch 'em all</h1>
-        <h2>{pokemon.name}</h2>
-        <div>  
+        <h2>{pokemon.name}</h2> 
         <img src={pokemon.img + '.jpg'}></img> 
-        </div>
         <nav>
         <a href="/pokemon">back to home</a>
         </nav>
